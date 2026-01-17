@@ -2,39 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Lexicognition AI - Scientific Lab Dark Theme */
+/* Lexicognition AI - Futuristic Academic Theme */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Crimson+Pro:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
+    --background: 230 25% 5%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 8%;
+    --card: 230 25% 8%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 10%;
+    --popover: 230 25% 10%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 160 84% 39%;
-    --primary-foreground: 222 47% 6%;
+    --primary: 185 90% 50%;
+    --primary-foreground: 230 25% 5%;
 
-    --secondary: 215 28% 17%;
+    --secondary: 270 60% 50%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 215 28% 14%;
-    --muted-foreground: 215 20% 55%;
+    --muted: 230 20% 15%;
+    --muted-foreground: 230 15% 55%;
 
-    --accent: 199 89% 48%;
-    --accent-foreground: 222 47% 6%;
+    --accent: 270 70% 60%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 215 28% 17%;
-    --input: 215 28% 20%;
-    --ring: 160 84% 39%;
+    --border: 230 20% 18%;
+    --input: 230 20% 20%;
+    --ring: 185 90% 50%;
 
     --radius: 0.5rem;
 
@@ -43,22 +43,29 @@
     --difficulty-hard: 38 92% 50%;
     --difficulty-devils: 0 72% 51%;
     
-    --exam-glow: 160 84% 39%;
-    --graph-node: 199 89% 48%;
-    --graph-edge: 215 28% 30%;
+    --exam-glow: 185 90% 50%;
+    --exam-glow-secondary: 270 70% 60%;
+    --graph-node: 185 90% 50%;
+    --graph-edge: 230 20% 30%;
     
     --metric-positive: 142 71% 45%;
     --metric-negative: 0 72% 51%;
-    --metric-neutral: 199 89% 48%;
+    --metric-neutral: 185 90% 50%;
 
-    --sidebar-background: 222 47% 5%;
+    --sidebar-background: 230 25% 4%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 160 84% 39%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 215 28% 12%;
+    --sidebar-primary: 185 90% 50%;
+    --sidebar-primary-foreground: 230 25% 5%;
+    --sidebar-accent: 230 20% 12%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 215 28% 15%;
-    --sidebar-ring: 160 84% 39%;
+    --sidebar-border: 230 20% 15%;
+    --sidebar-ring: 185 90% 50%;
+
+    /* Grading colors */
+    --grade-excellent: 142 71% 45%;
+    --grade-good: 185 90% 50%;
+    --grade-average: 38 92% 50%;
+    --grade-poor: 0 72% 51%;
   }
 }
 
@@ -75,11 +82,19 @@
   .font-mono {
     font-family: 'JetBrains Mono', monospace;
   }
+
+  .font-serif {
+    font-family: 'Crimson Pro', serif;
+  }
 }
 
 @layer components {
   .glass-panel {
     @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+
+  .glass-panel-strong {
+    @apply bg-card/90 backdrop-blur-2xl border border-border/60;
   }
 
   .glow-primary {
@@ -92,12 +107,95 @@
                 0 0 40px hsl(var(--accent) / 0.1);
   }
 
+  .glow-dual {
+    box-shadow: 0 0 30px hsl(var(--primary) / 0.3),
+                0 0 60px hsl(var(--accent) / 0.2),
+                inset 0 0 20px hsl(var(--primary) / 0.05);
+  }
+
   .thinking-pulse {
     animation: thinking 1.5s ease-in-out infinite;
   }
 
   .node-pulse {
     animation: nodePulse 2s ease-in-out infinite;
+  }
+
+  .neural-pulse {
+    animation: neuralPulse 3s ease-in-out infinite;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent;
+  }
+
+  .border-glow {
+    @apply relative;
+  }
+
+  .border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.5), hsl(var(--accent) / 0.3), hsl(var(--secondary) / 0.5));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .border-glow:hover::before {
+    opacity: 1;
+  }
+
+  /* Neural network animation container */
+  .neural-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .neural-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, hsl(var(--primary) / 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, hsl(var(--accent) / 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, hsl(var(--secondary) / 0.05) 0%, transparent 50%);
+    animation: neuralBackground 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* Upload zone styles */
+  .upload-zone {
+    @apply border-2 border-dashed border-border/50 rounded-xl p-12 transition-all duration-300;
+  }
+
+  .upload-zone:hover,
+  .upload-zone.drag-over {
+    @apply border-primary bg-primary/5;
+  }
+
+  /* Certificate styles */
+  .certificate {
+    background: 
+      linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--background)) 100%);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+  }
+
+  .certificate::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--secondary)));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
   }
 }
 
@@ -122,6 +220,28 @@
     }
   }
 
+  @keyframes neuralPulse {
+    0%, 100% {
+      opacity: 0.3;
+      filter: blur(0px);
+    }
+    50% {
+      opacity: 0.8;
+      filter: blur(1px);
+    }
+  }
+
+  @keyframes neuralBackground {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.5;
+    }
+    50% {
+      transform: scale(1.1) rotate(5deg);
+      opacity: 0.8;
+    }
+  }
+
   @keyframes slideIn {
     from {
       opacity: 0;
@@ -133,8 +253,91 @@
     }
   }
 
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes orbitNode {
+    0% {
+      transform: rotate(0deg) translateX(60px) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translateX(60px) rotate(-360deg);
+    }
+  }
+
+  @keyframes lineFlow {
+    0% {
+      stroke-dashoffset: 100;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
   .animate-slide-in {
     animation: slideIn 0.3s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-orbit {
+    animation: orbitNode 8s linear infinite;
+  }
+
+  .animate-line-flow {
+    stroke-dasharray: 100;
+    animation: lineFlow 2s ease-out forwards;
   }
 
   .scrollbar-thin {
@@ -154,4 +357,11 @@
     background-color: hsl(var(--border));
     border-radius: 3px;
   }
+
+  /* Delay utilities for staggered animations */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
 }

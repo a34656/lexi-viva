@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
+        serif: ['Crimson Pro', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -75,6 +76,12 @@ export default {
           node: "hsl(var(--graph-node))",
           edge: "hsl(var(--graph-edge))",
         },
+        grade: {
+          excellent: "hsl(var(--grade-excellent))",
+          good: "hsl(var(--grade-good))",
+          average: "hsl(var(--grade-average))",
+          poor: "hsl(var(--grade-poor))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -98,11 +105,34 @@ export default {
             boxShadow: "0 0 40px hsl(var(--primary) / 0.5)" 
           },
         },
+        "neural-flow": {
+          "0%": { 
+            strokeDashoffset: "100",
+            opacity: "0.3"
+          },
+          "50%": {
+            opacity: "1"
+          },
+          "100%": { 
+            strokeDashoffset: "0",
+            opacity: "0.3"
+          },
+        },
+        "node-glow": {
+          "0%, 100%": {
+            filter: "drop-shadow(0 0 3px hsl(var(--primary) / 0.5))"
+          },
+          "50%": {
+            filter: "drop-shadow(0 0 10px hsl(var(--primary) / 0.8))"
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "neural-flow": "neural-flow 3s ease-in-out infinite",
+        "node-glow": "node-glow 2s ease-in-out infinite",
       },
     },
   },
